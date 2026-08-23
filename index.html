@@ -23,17 +23,9 @@
         .card-content p { margin: 0 0 12px 0; }
         .pdf-button { display: flex; align-items: center; justify-content: center; background-color: #f8f9fa; color: #7bc07b; border: 1px solid #7bc07b; padding: 12px; border-radius: 6px; text-decoration: none; font-size: 13px; font-weight: bold; margin-top: 15px; width: 100%; box-sizing: border-box; clear: both; cursor: pointer; }
         .pdf-button:active { background-color: #f0f7f0; }
-        .image-overlay { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(0, 0, 0, 0.95); z-index: 10000; overflow-y: auto; text-align: center; cursor: pointer; -webkit-overflow-scrolling: touch; }
-        .overlay-hint { color: #7bc07b; font-size: 13px; font-weight: bold; padding: 15px 10px; display: block; background: rgba(0,0,0,0.8); position: sticky; top: 0; z-index: 10001; }
-        .overlay-img { width: 95%; max-width: 600px; height: auto; margin: 20px auto; display: block; border-radius: 4px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
     </style>
 </head>
 <body>
-
-    <div id="imgOverlay" class="image-overlay" onclick="closeImageOverlay()">
-        <span class="overlay-hint">⬅ ASİSTANA DÖNMEK İÇİN RESMİN VEYA EKRANIN HERHANGİ BİR YERİNE DOKUNUN</span>
-        <img id="targetImg" class="overlay-img" src="" alt="Şema Yükleniyor...">
-    </div>
 
     <div id="mainContent">
         <div class="header">
@@ -60,7 +52,7 @@
                 <div class="card-content">
                     <p><b>Belirti:</b> 'Burner Failure' arızası görülmesi veya ateşleme sisteminin durması.</p>
                     <p><b>Müdahale Adımları:</b><br>1. Ateşleme arızaları, panodaki <b>Siemens AZL52.00B1</b> ekranında listelenir.<br>2. Ekrandan sırasıyla <b>Operational stat › Fault History</b> adımlarıyla arıza koduna ulaşın.<br>3. Açıklamayı, kabin içindeki <b>List of fault status messages of LMV5... system</b> sayfasından bulunuz.<br>4. Arıza giderildikten sonra; ekranın <b>Alarm</b> sayfası üzerinden <b>Reset</b> işlemi yapın.</p>
-                    <button type="button" class="pdf-button" onclick="viewImagePage(20)">🖼 Sayfa 20: Brülör Görselini Net Aç</button>
+                    <button type="button" class="pdf-button" onclick="goToPdfPage(20)">📕 Sayfa 20: Brülör Kılavuz Sayfasına Git</button>
                 </div>
             </div>
 
@@ -72,8 +64,8 @@
                     <p><b>➔ Basınç Transmitteri Kalibrasyon Arızası:</b> Su seviyesini gerçek dışı değerlerde <b>(242mm vb.)</b> görüyorsanız, kalibrasyon bozulmuştur. Kazanı soğutup analog gösterge yarıdayken kalibrasyon işlemini yapın.</p>
                     <p><b>➔ Seviye Propları Gösterge Arızaları:</b> Ekranda <b>DLow</b> ibaresi görüyorsanız; propları sökerek <b>kireçlenmeye karşı</b> kontrol ediniz. Sorun çözülmez ise güç ve haberleşme kablolarını denetleyin.</p>
                     <p><b>➔ Kazan Besi Pompası Arızaları:</b> Su besleme yapılamazsa <b>yedek besi pompasını devreye alınız</b>. Arıza sürücüde ise 'Alarm' sayfasını inceleyin, su hatlarını ve <b>degazör tankının doluluk seviyesini</b> kontrol ediniz.</p>
-                    <p style="color:#dc3545;"><b>🛑 HAYATİ GÜVENLİK NOTU:</b> Yedek pompa da çalışmazsa, <b>DERHAL kazan ateşlemeyi durdurunuz!</b> Ana buhar vanasını kapatıp su seviyesini koruyunuz.</p>
-                    <button type="button" class="pdf-button" onclick="viewImagePage(17)">🖼 Sayfa 17: Su Seviye Şemasını Net Aç</button>
+                    <p style="color:#dc3545;"><b>🛑 HAYATİ GÜVEN LİK NOTU:</b> Yedek pompa da çalışmazsa, <b>DERHAL kazan ateşlemeyi durdurunuz!</b> Ana buhar vanasını kapatıp su seviyesini koruyunuz.</p>
+                    <button type="button" class="pdf-button" onclick="goToPdfPage(17)">📕 Sayfa 17: Su Seviye Şemasına Git</button>
                 </div>
             </div>
 
@@ -84,7 +76,7 @@
                 <div class="card-content">
                     <p><b>Kapsam:</b> Kazan dairesi su giriş hatları, degazör bağlantıları, besi pompaları giriş-çıkış vanaları ve bypass hatlarının komple akış diyagramı.</p>
                     <p><b>Operasyonel Kullanım:</b> Hatta yapılacak bakım, körleme veya vana değişim operasyonlarından önce bu şemayı inceleyerek akış yönünü mutlaka kontrol ediniz.</p>
-                    <button type="button" class="pdf-button" onclick="viewImagePage(14)">🖼 Sayfa 14: Akış Şemasını Net Aç</button>
+                    <button type="button" class="pdf-button" onclick="goToPdfPage(14)">📕 Sayfa 14: Akış Şemasına Git</button>
                 </div>
             </div>
 
@@ -97,7 +89,7 @@
                     <p><b>💨 Baca Gazı Maksimum Sıcaklığı:</b> 270 °C</p>
                     <p><b>💥 Maksimum Buhar Basıncı:</b> 20 Bar</p>
                     <p><b>🌀 Maksimum Fırın Basıncı:</b> 1500 Pa</p>
-                    <button type="button" class="pdf-button" onclick="viewImagePage(10)">🖼 Sayfa 10: Ekran Menü Rehberini Net Aç</button>
+                    <button type="button" class="pdf-button" onclick="goToPdfPage(10)">📕 Sayfa 10: Ekran Menü Rehberine Git</button>
                 </div>
             </div>
 
@@ -107,7 +99,7 @@
                 <div class="card-tag" style="background:#ffe8d6; color:#a04000;">🔥 GÜVENLİ ATEŞLEME</div>
                 <div class="card-content">
                     <p><b>Boiler Status:</b> Auto Running | <b>Feed Pump:</b> Auto | <b>Water Level:</b> Normal</p>
-                    <button type="button" class="pdf-button" onclick="viewImagePage(11)">🖼 Sayfa 11: Ateşleme Prosedürünü Net Aç</button>
+                    <button type="button" class="pdf-button" onclick="goToPdfPage(11)">📕 Sayfa 11: Ateşleme Prosedürüne Git</button>
                 </div>
             </div>
 
@@ -119,48 +111,20 @@
                     <p>• <b>Ana Buhar Vanası:</b> Buhar kesme operasyonları için ana vana.</p>
                     <p>• <b>Havadanlık Vanası:</b> Üst sistem hava tahliye ve emniyet blöf hattı üzerindedir.</p>
                     <p>• <b>Ana Gaz Kesme Valfi:</b> Brülör gaz rampası girişindedir.</p>
-                    <button type="button" class="pdf-button" onclick="viewImagePage(2)">🖼 Sayfa 2: Vana Yerleşim Planını Net Aç</button>
+                    <button type="button" class="pdf-button" onclick="goToPdfPage(2)">📕 Sayfa 2: Vana Yerleşim Planına Git</button>
                 </div>
             </div>
-                  </div>
+        </div>
     </div>
 
     <script>
-        function viewImagePage(pageNum) {
-            // Ana ekranı gizle, tam ekran görsel alanını aktifleştir
-            document.getElementById('mainContent').style.display = 'none';
+        function goToPdfPage(pageNum) {
+            // Canlı yayın adresini ve PDF döküman yolunu otomatik algılar
+            var currentHost = window.location.protocol + '//' + window.location.host + window.location.pathname;
+            var absolutePdfUrl = currentHost.replace('index.html', '') + 'kilavuz.pdf';
             
-            var overlay = document.getElementById('imgOverlay');
-            var imgTag = document.getElementById('targetImg');
-            
-            overlay.style.display = 'block';
-            
-            // Personel butona bastığında, internete yüklediğimiz doğrudan resim linkleri çağrılır
-            if (pageNum === 2) {
-                // Gönderdiğiniz vana yerleşim şeması buraya başarıyla bağlandı!
-                imgTag.src = 'https://ibb.co';
-            } else if (pageNum === 10) {
-                imgTag.src = 'BURAYA_SAYFA_10_LİNKİNİ_KOYACAĞIZ.jpg';
-            } else if (pageNum === 11) {
-                imgTag.src = 'BURAYA_SAYFA_11_LİNKİNİ_KOYACAĞIZ.jpg';
-            } else if (pageNum === 14) {
-                imgTag.src = 'BURAYA_SAYFA_14_LİNKİNİ_KOYACAĞIZ.jpg';
-            } else if (pageNum === 17) {
-                imgTag.src = 'BURAYA_SAYFA_17_LİNKİNİ_KOYACAĞIZ.jpg';
-            } else if (pageNum === 20) {
-                imgTag.src = 'BURAYA_SAYFA_20_LİNKİNİ_KOYACAĞIZ.jpg';
-            } else {
-                imgTag.src = ''; 
-            }
-            
-            window.scrollTo(0, 0);
-        }
-
-        function closeImageOverlay() {
-            // Görsel katmanını kapatır, temizler ve ana içeriği geri getirir
-            document.getElementById('imgOverlay').style.display = 'none';
-            document.getElementById('targetImg').src = '';
-            document.getElementById('mainContent').style.display = 'block';
+            // Tarayıcının ana PDF geçmişini bozmadan doğrudan hedef sayfaya yönlendirir
+            window.location.href = absolutePdfUrl + '#page=' + pageNum;
         }
 
         function searchEngine() {
@@ -216,4 +180,3 @@
     </script>
 </body>
 </html>
-
