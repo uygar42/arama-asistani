@@ -125,7 +125,7 @@
             display: none;
             margin-top: 15px;
             width: 100%;
-            height: 400px;
+            height: 450px;
             border: 1px solid #ccc;
             border-radius: 6px;
             overflow: hidden;
@@ -234,29 +234,25 @@
         </div>
     </div>
 
-           function togglePDF(containerId, pdfUrl) {
+    <script>
+        function togglePDF(containerId, pdfUrl) {
             var container = document.getElementById(containerId);
             
-            // Canlı GitHub Pages adresinizi otomatik tespit eder
             var currentHost = window.location.protocol + '//' + window.location.host + window.location.pathname;
             var absolutePdfUrl = currentHost.replace('index.html', '') + pdfUrl;
             
-            // Apple kısıtlamalarını aşan ve sekme açmadan sayfa odaklayan Google motoru linki
             var googleViewerUrl = 'https://google.com' + encodeURIComponent(absolutePdfUrl);
             
-            // Eğer pencere zaten açıksa kapat ve hafızadan temizle
             if (container.style.display === 'block') {
                 container.style.display = 'none';
                 container.innerHTML = '';
             } else {
-                // Diğer tüm açık PDF pencerelerini kapat (Ekran karmaşasını önler)
                 var activeContainers = document.getElementsByClassName('pdf-container');
                 for (var i = 0; i < activeContainers.length; i++) {
                     activeContainers[i].style.display = 'none';
                     activeContainers[i].innerHTML = '';
                 }
                 
-                // Seçilen kartın altında PDF penceresini Google motoru ile oluştur ve göster
                 container.style.display = 'block';
                 container.innerHTML = '<iframe src="' + googleViewerUrl + '" class="pdf-frame" allow="fullscreen"></iframe>';
             }
