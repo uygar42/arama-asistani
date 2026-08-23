@@ -12,7 +12,7 @@
             padding: 10px;
             box-sizing: border-box;
             max-width: 100vw;
-            overflow-x: hidden; /* Sağ-sol genel ekran taşmasını engeller */
+            overflow-x: hidden;
         }
         .header {
             background-color: #0056b3;
@@ -122,26 +122,14 @@
             cursor: pointer;
         }
         .pdf-button:active { background-color: #f8d7da; }
-        .page-hint {
-            background-color: #fff3cd;
-            color: #856404;
-            border: 1px solid #ffeeba;
-            padding: 8px 12px;
-            font-size: 13px;
-            font-weight: bold;
-            text-align: center;
-            border-radius: 6px 6px 0 0;
-            margin-top: 15px;
-        }
         .pdf-container {
             display: none;
             width: 100%;
-            height: 450px;
+            height: 480px;
             border: 1px solid #ccc;
-            border-radius: 0 0 6px 6px;
-            overflow-x: hidden; /* Sağ-sol kaymayı kesin olarak yasaklar */
-            overflow-y: scroll; /* Sadece dikey kaydırmaya zorlar */
-            -webkit-overflow-scrolling: touch; /* iOS parmak kaydırma ivmesini açar */
+            border-radius: 6px;
+            margin-top: 15px;
+            overflow: hidden;
         }
         .pdf-frame {
             width: 100%;
@@ -177,11 +165,8 @@
                 2. Ekrandan sırasıyla <b>Operational stat › Fault History</b> adımlarıyla arıza koduna ulaşın.<br>
                 3. Açıklamayı, kabin içindeki <b>List of fault status messages of LMV5... system</b> sayfasından bulunuz.<br>
                 4. Arıza giderildikten sonra; ekranın <b>Alarm</b> sayfası üzerinden <b>Reset</b> işlemi yapın.</p>
-                <button type="button" class="pdf-button" onclick="togglePDF('wrapper1', 'pdf1', 'kilavuz.pdf')">📄 Görsel İçin Kılavuz Penceresini Göster / Kapat</button>
-                <div id="wrapper1" style="display:none;">
-                    <div class="page-hint">🎯 İncelemeniz Gereken Bölüm: Sayfa 20 (Brülör Görseli)</div>
-                    <div id="pdf1" class="pdf-container"></div>
-                </div>
+                <button type="button" class="pdf-button" onclick="togglePDF('pdf1', 20)">📄 Görsel İçin Kılavuz Sayfa 20'yi Göster / Kapat</button>
+                <div id="pdf1" class="pdf-container"></div>
             </div>
         </div>
 
@@ -194,11 +179,8 @@
                 <p><b>➔ Seviye Propları Gösterge Arızaları:</b> Ekranda <b>DLow</b> ibaresi görüyorsanız; propları sökerek <b>kireçlenmeye karşı</b> kontrol ediniz. Sorun çözülmez ise güç ve haberleşme kablolarını denetleyin.</p>
                 <p><b>➔ Kazan Besi Pompası Arızaları:</b> Su besleme yapılamazsa <b>yedek besi pompasını devreye alınız</b>. Arıza sürücüde ise 'Alarm' sayfasını inceleyin, su hatlarını ve <b>degazör tankının doluluk seviyesini</b> kontrol ediniz.</p>
                 <p style="color:#dc3545;"><b>🛑 HAYATİ GÜVENLİK NOTU:</b> Yedek pompa da çalışmazsa, <b>DERHAL kazan ateşlemeyi durdurunuz!</b> Ana buhar vanasını kapatıp su seviyesini koruyunuz.</p>
-                <button type="button" class="pdf-button" onclick="togglePDF('wrapper2', 'pdf2', 'kilavuz.pdf')">📄 Şema İçin Kılavuz Penceresini Göster / Kapat</button>
-                <div id="wrapper2" style="display:none;">
-                    <div class="page-hint">🎯 İncelemeniz Gereken Bölüm: Sayfa 17 (Su Seviye Şeması)</div>
-                    <div id="pdf2" class="pdf-container"></div>
-                </div>
+                <button type="button" class="pdf-button" onclick="togglePDF('pdf2', 17)">📄 Şema İçin Kılavuz Sayfa 17'yi Göster / Kapat</button>
+                <div id="pdf2" class="pdf-container"></div>
             </div>
         </div>
 
@@ -209,11 +191,8 @@
             <div class="card-content">
                 <p><b>Kapsam:</b> Kazan dairesi su giriş hatları, degazör bağlantıları, besi pompaları giriş-çıkış vanaları ve bypass hatlarının komple akış diyagramı.</p>
                 <p><b>Operasyonel Kullanım:</b> Hatta yapılacak bakım, körleme veya vana değişim operasyonlarından önce bu şemayı inceleyerek akış yönünü mutlaka kontrol ediniz.</p>
-                <button type="button" class="pdf-button" onclick="togglePDF('wrapper3', 'pdf3', 'kilavuz.pdf')">📄 Akış Şeması İçin Kılavuz Penceresini Göster / Kapat</button>
-                <div id="wrapper3" style="display:none;">
-                    <div class="page-hint">🎯 İncelemeniz Gereken Bölüm: Sayfa 14 (Akış Şeması)</div>
-                    <div id="pdf3" class="pdf-container"></div>
-                </div>
+                <button type="button" class="pdf-button" onclick="togglePDF('pdf3', 14)">📄 Akış Şeması İçin Kılavuz Sayfa 14'ü Göster / Kapat</button>
+                <div id="pdf3" class="pdf-container"></div>
             </div>
         </div>
 
@@ -226,11 +205,8 @@
                 <p><b>💨 Baca Gazı Maksimum Sıcaklığı:</b> 270 °C</p>
                 <p><b>💥 Maksimum Buhar Basıncı:</b> 20 Bar</p>
                 <p><b>🌀 Maksimum Fırın Basıncı:</b> 1500 Pa</p>
-                <button type="button" class="pdf-button" onclick="togglePDF('wrapper4', 'pdf4', 'kilavuz.pdf')">📄 Ekran Menü Rehberi İçin Kılavuz Penceresini Göster / Kapat</button>
-                <div id="wrapper4" style="display:none;">
-                    <div class="page-hint">🎯 İncelemeniz Gereken Bölüm: Sayfa 10 (Ekran Menü Rehberi)</div>
-                    <div id="pdf4" class="pdf-container"></div>
-                </div>
+                <button type="button" class="pdf-button" onclick="togglePDF('pdf4', 10)">📄 Ekran Menü Rehberi İçin Kılavuz Sayfa 10'u Göster / Kapat</button>
+                <div id="pdf4" class="pdf-container"></div>
             </div>
         </div>
 
@@ -240,11 +216,8 @@
             <div class="card-tag" style="background:#ffe8d6; color:#a04000;">🔥 GÜVENLİ ATEŞLEME</div>
             <div class="card-content">
                 <p><b>Boiler Status:</b> Auto Running | <b>Feed Pump:</b> Auto | <b>Water Level:</b> Normal</p>
-                <button type="button" class="pdf-button" onclick="togglePDF('wrapper5', 'pdf5', 'kilavuz.pdf')">📄 Ateşleme Prosedürü İçin Kılavuz Penceresini Göster / Kapat</button>
-                <div id="wrapper5" style="display:none;">
-                    <div class="page-hint">🎯 İncelemeniz Gereken Bölüm: Sayfa 11 (Ateşleme Prosedürü)</div>
-                    <div id="pdf5" class="pdf-container"></div>
-                </div>
+                <button type="button" class="pdf-button" onclick="togglePDF('pdf5', 11)">📄 Ateşleme Prosedürü İçin Kılavuz Sayfa 11'i Göster / Kapat</button>
+                <div id="pdf5" class="pdf-container"></div>
             </div>
         </div>
 
@@ -256,45 +229,40 @@
                 <p>• <b>Ana Buhar Vanası:</b> Buhar kesme operasyonları için ana vana.</p>
                 <p>• <b>Havadanlık Vanası:</b> Üst sistem hava tahliye ve emniyet blöf hattı üzerindedir.</p>
                 <p>• <b>Ana Gaz Kesme Valfi:</b> Brülör gaz rampası girişindedir.</p>
-                <button type="button" class="pdf-button" onclick="togglePDF('wrapper6', 'pdf6', 'kilavuz.pdf')">📄 Vana Yerleşim Planı İçin Kılavuz Penceresini Göster / Kapat</button>
-                <div id="wrapper6" style="display:none;">
-                    <div class="page-hint">🎯 İncelemeniz Gereken Bölüm: Sayfa 2 (Vana Yerleşim Planı)</div>
-                    <div id="pdf6" class="pdf-container"></div>
-                </div>
+                <button type="button" class="pdf-button" onclick="togglePDF('pdf6', 2)">📄 Vana Yerleşim Planı İçin Kılavuz Sayfa 2'yi Göster / Kapat</button>
+                <div id="pdf6" class="pdf-container"></div>
             </div>
         </div>
     </div>
 
     <script>
-        function togglePDF(wrapperId, containerId, pdfUrl) {
-            var wrapper = document.getElementById(wrapperId);
+        function togglePDF(containerId, pageNum) {
             var container = document.getElementById(containerId);
             
-            if (wrapper.style.display === 'block') {
-                wrapper.style.display = 'none';
+            // Eğer pencere zaten açıksa kapat ve içini temizle
+            if (container.style.display === 'block') {
                 container.style.display = 'none';
                 container.innerHTML = '';
             } else {
-                // Diğer tüm açık PDF pencerelerini kapat
-                var cards = document.getElementsByClassName('card');
-                for (var i = 1; i <= cards.length; i++) {
-                    var w = document.getElementById('wrapper' + i);
-                    var c = document.getElementById('pdf' + i);
-                    if (w && c) {
-                        w.style.display = 'none';
-                        c.style.display = 'none';
-                        c.innerHTML = '';
-                    }
+                // Diğer tüm açık PDF pencerelerini kapat (Ekran karmaşasını önler)
+                var activeContainers = document.getElementsByClassName('pdf-container');
+                for (var i = 0; i < activeContainers.length; i++) {
+                    activeContainers[i].style.display = 'none';
+                    activeContainers[i].innerHTML = '';
                 }
                 
-                // Seçilen pencereyi dikey kaydırma desteği ile aç
-                wrapper.style.display = 'block';
-                container.style.display = 'block';
+                // Canlı yayın adresini ve PDF yolunu tam olarak doğrular
+                var currentHost = window.location.protocol + '//' + window.location.host + window.location.pathname;
+                var absolutePdfUrl = currentHost.replace('index.html', '') + 'kilavuz.pdf';
                 
-                // Safari'de dikey kaydırmanın kilitlenmemesi için native nesne kullanılır
-                container.innerHTML = '<object data="' + pdfUrl + '" type="application/pdf" class="pdf-frame">' +
-                                      '<iframe src="' + pdfUrl + '" class="pdf-frame"></iframe>' +
-                                      '</object>';
+                // Resmi ve kararlı Mozilla PDF.js altyapısı üzerinden hedef sayfayı tam olarak odaklar
+                var pdfJsViewerUrl = 'https://cloudflare.com' + 
+                                     '?file=' + encodeURIComponent(absolutePdfUrl) + 
+                                     '#page=' + pageNum;
+                
+                // Seçilen kartın altında dikey pencereyi oluştur ve göster
+                container.style.display = 'block';
+                container.innerHTML = '<iframe src="' + pdfJsViewerUrl + '" class="pdf-frame" allow="fullscreen"></iframe>';
             }
         }
 
