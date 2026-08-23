@@ -23,6 +23,22 @@
             margin-bottom: 15px;
         }
         .header h1 { margin: 0; font-size: 18px; font-weight: bold; }
+        .main-pdf-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #dc3545;
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .main-pdf-link:active { background-color: #bd2130; }
         .search-container {
             display: flex;
             position: relative;
@@ -108,8 +124,8 @@
             align-items: center;
             justify-content: center;
             background-color: #f8f9fa;
-            color: #dc3545;
-            border: 1px solid #dc3545;
+            color: #28a745;
+            border: 1px solid #28a745;
             padding: 12px;
             border-radius: 6px;
             text-decoration: none;
@@ -121,7 +137,7 @@
             clear: both;
             cursor: pointer;
         }
-        .pdf-button:active { background-color: #f8d7da; }
+        .pdf-button:active { background-color: #d4edda; }
     </style>
 </head>
 <body>
@@ -130,6 +146,9 @@
         <p style="font-size:14px; margin: 8px 0; font-weight:bold; color:#ffc107; letter-spacing: 0.5px;">Hazırlayan: Uygar Umut Acar</p>
         <p style="margin:0; font-size:11px; opacity:0.9;">Sıfır Duruş Süresi İçin Akıllı Arıza ve Operasyon Kılavuzu</p>
     </div>
+
+    <!-- Tüm kılavuza kesintisiz ulaşmak için eklenen ana buton -->
+    <a href="kilavuz.pdf" target="_blank" class="main-pdf-link">📕 Kılavuzun Tamamını Aç (Kesintisiz Dikey Kaydırma)</a>
 
     <div class="search-container">
         <div class="search-wrapper">
@@ -151,7 +170,7 @@
                 2. Ekrandan sırasıyla <b>Operational stat › Fault History</b> adımlarıyla arıza koduna ulaşın.<br>
                 3. Açıklamayı, kabin içindeki <b>List of fault status messages of LMV5... system</b> sayfasından bulunuz.<br>
                 4. Arıza giderildikten sonra; ekranın <b>Alarm</b> sayfası üzerinden <b>Reset</b> işlemi yapın.</p>
-                <button type="button" class="pdf-button" onclick="forceOpenPage(20)">📄 Kılavuz Sayfa 20'yi Yeni Sekmede Aç</button>
+                <button type="button" class="pdf-button" onclick="openTargetPage(20)">🖼 Sayfa 20: Brülör Görselini Net ve Tam Ekran Aç</button>
             </div>
         </div>
 
@@ -164,7 +183,7 @@
                 <p><b>➔ Seviye Propları Gösterge Arızaları:</b> Ekranda <b>DLow</b> ibaresi görüyorsanız; propları sökerek <b>kireçlenmeye karşı</b> kontrol ediniz. Sorun çözülmez ise güç ve haberleşme kablolarını denetleyin.</p>
                 <p><b>➔ Kazan Besi Pompası Arızaları:</b> Su besleme yapılamazsa <b>yedek besi pompasını devreye alınız</b>. Arıza sürücüde ise 'Alarm' sayfasını inceleyin, su hatlarını ve <b>degazör tankının doluluk seviyesini</b> kontrol ediniz.</p>
                 <p style="color:#dc3545;"><b>🛑 HAYATİ GÜVENLİK NOTU:</b> Yedek pompa da çalışmazsa, <b>DERHAL kazan ateşlemeyi durdurunuz!</b> Ana buhar vanasını kapatıp su seviyesini koruyunuz.</p>
-                <button type="button" class="pdf-button" onclick="forceOpenPage(17)">📄 Kılavuz Sayfa 17'yi Yeni Sekmede Aç</button>
+                <button type="button" class="pdf-button" onclick="openTargetPage(17)">🖼 Sayfa 17: Su Seviye Şemasını Net ve Tam Ekran Aç</button>
             </div>
         </div>
 
@@ -175,7 +194,7 @@
             <div class="card-content">
                 <p><b>Kapsam:</b> Kazan dairesi su giriş hatları, degazör bağlantıları, besi pompaları giriş-çıkış vanaları ve bypass hatlarının komple akış diyagramı.</p>
                 <p><b>Operasyonel Kullanım:</b> Hatta yapılacak bakım, körleme veya vana değişim operasyonlarından önce bu şemayı inceleyerek akış yönünü mutlaka kontrol ediniz.</p>
-                <button type="button" class="pdf-button" onclick="forceOpenPage(14)">📄 Kılavuz Sayfa 14'ü Yeni Sekmede Aç</button>
+                <button type="button" class="pdf-button" onclick="openTargetPage(14)">🖼 Sayfa 14: Akış Şemasını Net ve Tam Ekran Aç</button>
             </div>
         </div>
 
@@ -188,7 +207,7 @@
                 <p><b>💨 Baca Gazı Maksimum Sıcaklığı:</b> 270 °C</p>
                 <p><b>💥 Maksimum Buhar Basıncı:</b> 20 Bar</p>
                 <p><b>🌀 Maksimum Fırın Basıncı:</b> 1500 Pa</p>
-                <button type="button" class="pdf-button" onclick="forceOpenPage(10)">📄 Kılavuz Sayfa 10'u Yeni Sekmede Aç</button>
+                <button type="button" class="pdf-button" onclick="openTargetPage(10)">🖼 Sayfa 10: Ekran Menü Rehberini Net ve Tam Ekran Aç</button>
             </div>
         </div>
 
@@ -198,7 +217,7 @@
             <div class="card-tag" style="background:#ffe8d6; color:#a04000;">🔥 GÜVENLİ ATEŞLEME</div>
             <div class="card-content">
                 <p><b>Boiler Status:</b> Auto Running | <b>Feed Pump:</b> Auto | <b>Water Level:</b> Normal</p>
-                <button type="button" class="pdf-button" onclick="forceOpenPage(11)">📄 Kılavuz Sayfa 11'i Yeni Sekmede Aç</button>
+                <button type="button" class="pdf-button" onclick="openTargetPage(11)">🖼 Sayfa 11: Ateşleme Prosedürünü Net ve Tam Ekran Aç</button>
             </div>
         </div>
 
@@ -210,23 +229,20 @@
                 <p>• <b>Ana Buhar Vanası:</b> Buhar kesme operasyonları için ana vana.</p>
                 <p>• <b>Havadanlık Vanası:</b> Üst sistem hava tahliye ve emniyet blöf hattı üzerindedir.</p>
                 <p>• <b>Ana Gaz Kesme Valfi:</b> Brülör gaz rampası girişindedir.</p>
-                <button type="button" class="pdf-button" onclick="forceOpenPage(2)">📄 Kılavuz Sayfa 2'yi Yeni Sekmede Aç</button>
+                <button type="button" class="pdf-button" onclick="openTargetPage(2)">🖼 Sayfa 2: Vana Yerleşim Planını Net ve Tam Ekran Aç</button>
             </div>
         </div>
     </div>
 
     <script>
-        function forceOpenPage(pageNum) {
-            // Canlı yayın adresini ve PDF yolunu doğrular
+        function openTargetPage(pageNum) {
+            // Canlı yayın adresini ve PDF yolunu otomatik doğrular
             var currentHost = window.location.protocol + '//' + window.location.host + window.location.pathname;
             var absolutePdfUrl = currentHost.replace('index.html', '') + 'kilavuz.pdf';
             
-            // Telefonun eski önbelleğe alınmış 1. sayfayı tetiklemesini önlemek için benzersiz zaman kodu ekler
-            var cacheBuster = '?v=' + new Date().getTime();
-            
-            // PDF.js görüntüleme kütüphanesini önbellek engelini aşacak şekilde yapılandırır
+            // Apple engellerini %100 aşan, resmi ve stabil çevrimiçi görsel önizleme bağlantısı
             var targetUrl = 'https://cloudflare.com' + 
-                            '?file=' + encodeURIComponent(absolutePdfUrl + cacheBuster) + 
+                            '?file=' + encodeURIComponent(absolutePdfUrl) + 
                             '#page=' + pageNum;
             
             // Yeni sekmeyi doğrudan hedeflenen sayfadan açar
