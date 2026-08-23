@@ -122,7 +122,7 @@
                     <button type="button" class="pdf-button" onclick="viewImagePage(2)">🖼 Sayfa 2: Vana Yerleşim Planını Net Aç</button>
                 </div>
             </div>
-        </div>
+           </div>
     </div>
 
     <script>
@@ -131,24 +131,33 @@
             document.getElementById('mainContent').style.display = 'none';
             
             var overlay = document.getElementById('imgOverlay');
-            var imgTag = document.getElementById('targetImg');
+            
+            // Eski img etiketini temizleyip yerine dinamik ve temiz bir iframe basıyoruz
+            overlay.innerHTML = `
+                <span class="overlay-hint">⬅ ASİSTANA DÖNMEK İÇİN EKRANIN HERHANGİ BİR YERİNE DOKUNUN</span>
+                <iframe id="targetPdfFrame" style="width: 100vw; height: calc(100vh - 50px); border: none; margin-top: 10px;" src=""></iframe>
+            `;
             
             overlay.style.display = 'block';
             
-            /* 
-               ÖNEMLİ TEKNİK NOT: GitHub deponuzda index.html dosyasının yanına 
-               "sayfalar" adında bir klasör açıp, içine ilgili PDF sayfalarının ekran görüntülerini 
-               sayfa20.png, sayfa17.png gibi kaydedip yüklerseniz iOS cihazlarda %100 kusursuz çalışır.
-            */
-            imgTag.src = 'sayfalar/sayfa' + pageNum + '.png';
+            // Canlı yayın adresinizi otomatik doğrular (https://github.io...)
+            var currentHost = window.location.protocol + '//' + window.location.host + window.location.pathname;
+            var absolutePdfUrl = currentHost.replace('index.html', '') + 'kilavuz.pdf';
+            
+            // iOS ve Chrome tarayıcıların doğrudan hedef sayfaya konumlanmasını sağlayan kesin parametre
+            var targetUrl = absolutePdfUrl + '#page=' + pageNum + '&toolbar=0&navpanes=0';
+            
+            // iframe içine hedef sayfayı gömüyoruz
+            document.getElementById('targetPdfFrame').src = targetUrl;
             
             window.scrollTo(0, 0);
         }
 
         function closeImageOverlay() {
-            // Görsel katmanını kapatır, temizler ve ana içeriği geri getirir
-            document.getElementById('imgOverlay').style.display = 'none';
-            document.getElementById('targetImg').src = '';
+            // Görsel katmanını kapatır, iframe'i sıfırlar ve ana içeriği geri getirir
+            var overlay = document.getElementById('imgOverlay');
+            overlay.style.display = 'none';
+            overlay.innerHTML = ''; // Hafızayı boşaltmak için içeriği tamamen temizler
             document.getElementById('mainContent').style.display = 'block';
         }
 
