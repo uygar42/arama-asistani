@@ -122,7 +122,7 @@
                     <button type="button" class="pdf-button" onclick="viewImagePage(2)">🖼 Sayfa 2: Vana Yerleşim Planını Net Aç</button>
                 </div>
             </div>
-           </div>
+                  </div>
     </div>
 
     <script>
@@ -131,33 +131,35 @@
             document.getElementById('mainContent').style.display = 'none';
             
             var overlay = document.getElementById('imgOverlay');
-            
-            // Eski img etiketini temizleyip yerine dinamik ve temiz bir iframe basıyoruz
-            overlay.innerHTML = `
-                <span class="overlay-hint">⬅ ASİSTANA DÖNMEK İÇİN EKRANIN HERHANGİ BİR YERİNE DOKUNUN</span>
-                <iframe id="targetPdfFrame" style="width: 100vw; height: calc(100vh - 50px); border: none; margin-top: 10px;" src=""></iframe>
-            `;
+            var imgTag = document.getElementById('targetImg');
             
             overlay.style.display = 'block';
             
-            // Canlı yayın adresinizi otomatik doğrular (https://github.io...)
-            var currentHost = window.location.protocol + '//' + window.location.host + window.location.pathname;
-            var absolutePdfUrl = currentHost.replace('index.html', '') + 'kilavuz.pdf';
-            
-            // iOS ve Chrome tarayıcıların doğrudan hedef sayfaya konumlanmasını sağlayan kesin parametre
-            var targetUrl = absolutePdfUrl + '#page=' + pageNum + '&toolbar=0&navpanes=0';
-            
-            // iframe içine hedef sayfayı gömüyoruz
-            document.getElementById('targetPdfFrame').src = targetUrl;
+            // Personel butona bastığında, internete yüklediğimiz doğrudan resim linkleri çağrılır
+            if (pageNum === 2) {
+                // Gönderdiğiniz vana yerleşim şeması buraya başarıyla bağlandı!
+                imgTag.src = 'https://ibb.co';
+            } else if (pageNum === 10) {
+                imgTag.src = 'BURAYA_SAYFA_10_LİNKİNİ_KOYACAĞIZ.jpg';
+            } else if (pageNum === 11) {
+                imgTag.src = 'BURAYA_SAYFA_11_LİNKİNİ_KOYACAĞIZ.jpg';
+            } else if (pageNum === 14) {
+                imgTag.src = 'BURAYA_SAYFA_14_LİNKİNİ_KOYACAĞIZ.jpg';
+            } else if (pageNum === 17) {
+                imgTag.src = 'BURAYA_SAYFA_17_LİNKİNİ_KOYACAĞIZ.jpg';
+            } else if (pageNum === 20) {
+                imgTag.src = 'BURAYA_SAYFA_20_LİNKİNİ_KOYACAĞIZ.jpg';
+            } else {
+                imgTag.src = ''; 
+            }
             
             window.scrollTo(0, 0);
         }
 
         function closeImageOverlay() {
-            // Görsel katmanını kapatır, iframe'i sıfırlar ve ana içeriği geri getirir
-            var overlay = document.getElementById('imgOverlay');
-            overlay.style.display = 'none';
-            overlay.innerHTML = ''; // Hafızayı boşaltmak için içeriği tamamen temizler
+            // Görsel katmanını kapatır, temizler ve ana içeriği geri getirir
+            document.getElementById('imgOverlay').style.display = 'none';
+            document.getElementById('targetImg').src = '';
             document.getElementById('mainContent').style.display = 'block';
         }
 
@@ -214,3 +216,4 @@
     </script>
 </body>
 </html>
+
