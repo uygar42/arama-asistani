@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Mirel Süt Kazan Dairesi Asistanı</title>
+    <style>
+        :root {
+            --primary: #0056b3;
+            --danger: #dc3545;
+            --warning: #ffc107;
+            --success: #28a745;
+            --dark: #212529;
+            --light: #f8f9fa;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+        body { background-color: #e9ecef; color: var(--dark); padding-bottom: 40px; }
+        
+        /* Başlık ve İmza Alanı */
+        .header { background: linear-gradient(135deg, #004085, #0056b3); color: white; padding: 25px 15px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .header h1 { font-size: 1.4rem; margin-bottom: 3px; letter-spacing: 1px; }
+        .header p { font-size: 0.85rem; opacity: 0.9; font-weight: bold; color: var(--warning); text-transform: uppercase; margin-bottom: 10px; }
+        .author-badge { display: inline-block; background: rgba(255, 255, 255, 0.15); color: #fff; padding: 4px 14px; border-radius: 15px; font-size: 0.8rem; font-weight: 500; border: 1px solid rgba(255, 255, 255, 0.25); letter-spacing: 0.5px; }
+        
+        .container { padding: 15px; max-width: 500px; margin: 0 auto; }
+        .section-title { font-size: 0.9rem; color: #495057; margin: 20px 0 8px 5px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: bold; display: flex; align-items: center; gap: 5px; }
+        .card { background: white; padding: 15px; border-radius: 12px; box-shadow: 0 3px 10px rgba(0,0,0,0.05); margin-bottom: 12px; }
+        .grid-limits { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .limit-item { background: var(--light); padding: 12px; border-radius: 8px; border-left: 4px solid var(--primary); }
+        .limit-item.alert { border-left-color: var(--danger); }
+        .limit-label { font-size: 0.75rem; color: #6c757d; font-weight: bold; }
+        .limit-value { font-size: 1.1rem; font-weight: bold; color: var(--dark); margin-top: 2px; }
+        .search-box { width: 100%; padding: 12px 15px; border: 2px solid #ced4da; border-radius: 8px; font-size: 1rem; outline: none; transition: 0.2s; }
+        .search-box:focus { border-color: var(--primary); }
+        .fault-item { border: 1px solid #dee2e6; border-radius: 8px; margin-bottom: 10px; overflow: hidden; background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+        .fault-trigger { background: var(--light); padding: 14px 12px; font-weight: bold; font-size: 0.95rem; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+        .fault-trigger .badge { color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.7rem; font-weight: bold; text-transform: uppercase; }
+        .badge.kritik { background: var(--danger); }
+        .badge.prob { background: #fd7e14; }
+        .badge.kalibrasyon { background: var(--primary); }
+        .fault-content { padding: 15px; display: none; background: #fff; border-top: 1px solid #dee2e6; font-size: 0.9rem; line-height: 1.5; color: #333; }
+        .pdf-box { display: flex; flex-direction: column; gap: 8px; }
+        .pdf-item { background: #e8f4fd; border: 1px solid #bee5eb; padding: 12px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; text-decoration: none; color: #004085; font-weight: 500; font-size: 0.9rem; }
+        .pdf-item span { font-weight: bold; background: var(--primary); color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; }
+        
+        .footer-area { text-align: center; margin-top: 30px; padding: 10px; border-top: 1px solid #dee2e6; }
+        .footer-note { font-size: 0.75rem; color: #6c757d; }
+    </style>
+</head>
+<body>
+
+    <!-- Güncellenen Başlık ve İmza Alanı -->
+    <div class="header">
+        <h1>🏭 MİREL SÜT</h1>
+        <p>Kazan Dairesi Akıllı Arıza Asistanı</p>
+        <div class="author-badge">👨‍💻 Hazırlayan: Uygar Umut Acar</div>
+    </div>
+
+    <div class="container">
+        
+        <div class="section-title">🚨 KRİTİK OPERASYON SINIRLARI</div>
+        <div class="card grid-limits">
+            <div class="limit-item alert">
+                <div class="limit-label">Fırın Sıcaklığı</div>
+                <div class="limit-value">Maks 800 °C</div>
+            </div>
+            <div class="limit-item alert">
+                <div class="limit-label">Baca Gazı</div>
+                <div class="limit-value">Maks 270 °C</div>
+            </div>
+            <div class="limit-item">
+                <div class="limit-label">Buhar Basıncı</div>
+                <div class="limit-value">Maks 20 Bar</div>
+            </div>
+            <div class="limit-item">
+                <div class="limit-label">Fırın Basıncı</div>
+                <div class="limit-value">Maks 1500 Pa</div>
+            </div>
+        </div>
+
+        <div class="section-title">🔍 HIZLI ARIZA ARAMA</div>
+        <div class="card">
+            <input type="text" id="searchInput" class="search-box" placeholder="Arıza kodu veya kelime yazın (Örn: DLow, 242)..." onkeyup="searchFaults()">
+            <div style="margin-top: 15px;" id="faultList">
+                
+                <div class="fault-item">
+                    <div class="fault-trigger" onclick="toggleFault(this)">
+                        <span>Brülör Arızası (Burner Failure)</span>
+                        <span class="badge kritik">KRİTİK</span>
+                    </div>
+                    <div class="fault-content">
+                        <strong>Belirti:</strong> Ateşleme sistemi tamamen durur.<br><br>
+                        <strong>İlk Müdahale Adımları:</strong><br>
+                        1. Panodaki Siemens AZL52.00B1 ekrana gidin.<br>
+                        2. Sırasıyla <code>Operational stat › Fault History</code> adımlarını takip edin.<br>
+                        3. Güncel arıza kodunu not edip kılavuzun ilgili sayfasına bakın.
+                    </div>
+                </div>
+
+                <div class="fault-item">
+                    <div class="fault-trigger" onclick="toggleFault(this)">
+                        <span>DLow Gösterge Hatası</span>
+                        <span class="badge prob">PROB</span>
+                    </div>
+                    <div class="fault-content">
+                        <strong>Nedeni:</strong> Seviye proplarında aşırı kireçlenme veya tortu birikmesi.<br><br>
+                        <strong>Çözüm:</strong> Sistemi güvenli duruşa alın. Propları dikkatlice sökün. Kireç çözücü ve ince zımpara yardımıyla temizleyip yeniden kalibre ederek montajını yapın.
+                    </div>
+                </div>
+
+                <div class="fault-item">
+                    <div class="fault-trigger" onclick="toggleFault(this)">
+                        <span>Sabit 242mm Basınç Hatası</span>
+                        <span class="badge kalibrasyon">KALİBRASYON</span>
+                    </div>
+                    <div class="fault-content">
+                        <strong>Nedeni:</strong> Su seviyesinin sürekli gerçek dışı (sabit 242mm vb.) değerlerde takılı kalması.<br><br>
+                        <strong>Çözüm:</strong> Basınç transmitteri kalibrasyonu bozulmuştur. Panodan sıfırlama yapın, sorun çözülmezse kılavuzun 20. sayfasındaki fiziksel kalibrasyon adımlarını uygulayın.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="section-title">📑 AKILLI PDF DÖKÜMAN İNDEKSİ</div>
+        <div class="card pdf-box">
+            <div class="pdf-item">Vana Yerleşim Planı <span>Sayfa 2</span></div>
+            <div class="pdf-item">Ekran Menü Rehberi (Siemens AZL) <span>Sayfa 10</span></div>
+            <div class="pdf-item">Güvenli Ateşleme Prosedürü <span>Sayfa 11</span></div>
+            <div class="pdf-item">Buhar Kazanı Su Besleme Akış Şeması <span>Sayfa 14</span></div>
+            <div class="pdf-item">Su Pompası Detayları ve Şeması <span>Sayfa 17</span></div>
+            <div class="pdf-item">Brülör Arızası Müdahale Şeması <span>Sayfa 20</span></div>
+        </div>
+
+        <div class="footer-area">
+            <p class="footer-note">Mirel Süt Teknik Departmanı Arıza Takip Sistemi v1.0</p>
+        </div>
+    </div>
+
+    <script>
+        function toggleFault(element) {
+            const content = element.nextElementSibling;
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
+        }
+
+        function searchFaults() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let items = document.getElementsByClassName('fault-item');
+            
+            for (let i = 0; i < items.length; i++) {
+                let text = items[i].innerText.toLowerCase();
+                if (text.includes(input)) {
+                    items[i].style.display = "block";
+                } else {
+                    items[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+</body>
+</html>
