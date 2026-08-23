@@ -29,7 +29,7 @@
             justify-content: center;
             background-color: #dc3545;
             color: white;
-            padding: 12px;
+            padding: 14px 12px;
             border-radius: 8px;
             text-decoration: none;
             font-size: 14px;
@@ -124,8 +124,8 @@
             align-items: center;
             justify-content: center;
             background-color: #f8f9fa;
-            color: #28a745;
-            border: 1px solid #28a745;
+            color: #0056b3;
+            border: 1px solid #0056b3;
             padding: 12px;
             border-radius: 6px;
             text-decoration: none;
@@ -137,7 +137,7 @@
             clear: both;
             cursor: pointer;
         }
-        .pdf-button:active { background-color: #d4edda; }
+        .pdf-button:active { background-color: #e6f0fa; }
     </style>
 </head>
 <body>
@@ -147,7 +147,7 @@
         <p style="margin:0; font-size:11px; opacity:0.9;">Sıfır Duruş Süresi İçin Akıllı Arıza ve Operasyon Kılavuzu</p>
     </div>
 
-    <!-- Tüm kılavuza kesintisiz ulaşmak için eklenen ana buton -->
+    <!-- Cloudflare engelini tamamen aşan, doğrudan yerel döküman bağlantısı -->
     <a href="kilavuz.pdf" target="_blank" class="main-pdf-link">📕 Kılavuzun Tamamını Aç (Kesintisiz Dikey Kaydırma)</a>
 
     <div class="search-container">
@@ -170,7 +170,7 @@
                 2. Ekrandan sırasıyla <b>Operational stat › Fault History</b> adımlarıyla arıza koduna ulaşın.<br>
                 3. Açıklamayı, kabin içindeki <b>List of fault status messages of LMV5... system</b> sayfasından bulunuz.<br>
                 4. Arıza giderildikten sonra; ekranın <b>Alarm</b> sayfası üzerinden <b>Reset</b> işlemi yapın.</p>
-                <button type="button" class="pdf-button" onclick="openTargetPage(20)">🖼 Sayfa 20: Brülör Görselini Net ve Tam Ekran Aç</button>
+                <button type="button" class="pdf-button" onclick="openPdfSection(20)">📄 Sayfa 20'deki Görsel İçin Kılavuzu Aç</button>
             </div>
         </div>
 
@@ -183,7 +183,7 @@
                 <p><b>➔ Seviye Propları Gösterge Arızaları:</b> Ekranda <b>DLow</b> ibaresi görüyorsanız; propları sökerek <b>kireçlenmeye karşı</b> kontrol ediniz. Sorun çözülmez ise güç ve haberleşme kablolarını denetleyin.</p>
                 <p><b>➔ Kazan Besi Pompası Arızaları:</b> Su besleme yapılamazsa <b>yedek besi pompasını devreye alınız</b>. Arıza sürücüde ise 'Alarm' sayfasını inceleyin, su hatlarını ve <b>degazör tankının doluluk seviyesini</b> kontrol ediniz.</p>
                 <p style="color:#dc3545;"><b>🛑 HAYATİ GÜVENLİK NOTU:</b> Yedek pompa da çalışmazsa, <b>DERHAL kazan ateşlemeyi durdurunuz!</b> Ana buhar vanasını kapatıp su seviyesini koruyunuz.</p>
-                <button type="button" class="pdf-button" onclick="openTargetPage(17)">🖼 Sayfa 17: Su Seviye Şemasını Net ve Tam Ekran Aç</button>
+                <button type="button" class="pdf-button" onclick="openPdfSection(17)">📄 Sayfa 17'deki Şema İçin Kılavuzu Aç</button>
             </div>
         </div>
 
@@ -194,7 +194,7 @@
             <div class="card-content">
                 <p><b>Kapsam:</b> Kazan dairesi su giriş hatları, degazör bağlantıları, besi pompaları giriş-çıkış vanaları ve bypass hatlarının komple akış diyagramı.</p>
                 <p><b>Operasyonel Kullanım:</b> Hatta yapılacak bakım, körleme veya vana değişim operasyonlarından önce bu şemayı inceleyerek akış yönünü mutlaka kontrol ediniz.</p>
-                <button type="button" class="pdf-button" onclick="openTargetPage(14)">🖼 Sayfa 14: Akış Şemasını Net ve Tam Ekran Aç</button>
+                <button type="button" class="pdf-button" onclick="openPdfSection(14)">📄 Sayfa 14'teki Akış Şeması İçin Kılavuzu Aç</button>
             </div>
         </div>
 
@@ -207,7 +207,7 @@
                 <p><b>💨 Baca Gazı Maksimum Sıcaklığı:</b> 270 °C</p>
                 <p><b>💥 Maksimum Buhar Basıncı:</b> 20 Bar</p>
                 <p><b>🌀 Maksimum Fırın Basıncı:</b> 1500 Pa</p>
-                <button type="button" class="pdf-button" onclick="openTargetPage(10)">🖼 Sayfa 10: Ekran Menü Rehberini Net ve Tam Ekran Aç</button>
+                <button type="button" class="pdf-button" onclick="openPdfSection(10)">📄 Sayfa 10'daki Ekran Menü Rehberi İçin Kılavuzu Aç</button>
             </div>
         </div>
 
@@ -217,7 +217,7 @@
             <div class="card-tag" style="background:#ffe8d6; color:#a04000;">🔥 GÜVENLİ ATEŞLEME</div>
             <div class="card-content">
                 <p><b>Boiler Status:</b> Auto Running | <b>Feed Pump:</b> Auto | <b>Water Level:</b> Normal</p>
-                <button type="button" class="pdf-button" onclick="openTargetPage(11)">🖼 Sayfa 11: Ateşleme Prosedürünü Net ve Tam Ekran Aç</button>
+                <button type="button" class="pdf-button" onclick="openPdfSection(11)">📄 Sayfa 11'deki Ateşleme Prosedürü İçin Kılavuzu Aç</button>
             </div>
         </div>
 
@@ -229,23 +229,20 @@
                 <p>• <b>Ana Buhar Vanası:</b> Buhar kesme operasyonları için ana vana.</p>
                 <p>• <b>Havadanlık Vanası:</b> Üst sistem hava tahliye ve emniyet blöf hattı üzerindedir.</p>
                 <p>• <b>Ana Gaz Kesme Valfi:</b> Brülör gaz rampası girişindedir.</p>
-                <button type="button" class="pdf-button" onclick="openTargetPage(2)">🖼 Sayfa 2: Vana Yerleşim Planını Net ve Tam Ekran Aç</button>
+                <button type="button" class="pdf-button" onclick="openPdfSection(2)">📄 Sayfa 2'deki Vana Yerleşim Planı İçin Kılavuzu Aç</button>
             </div>
         </div>
     </div>
 
     <script>
-        function openTargetPage(pageNum) {
-            // Canlı yayın adresini ve PDF yolunu otomatik doğrular
-            var currentHost = window.location.protocol + '//' + window.location.host + window.location.pathname;
-            var absolutePdfUrl = currentHost.replace('index.html', '') + 'kilavuz.pdf';
+        function openPdfSection(pageNum) {
+            // Telefonun eski kilitli önbelleğini bozmak için dinamik zaman damgası üretir
+            var cacheBuster = '?v=' + new Date().getTime();
             
-            // Apple engellerini %100 aşan, resmi ve stabil çevrimiçi görsel önizleme bağlantısı
-            var targetUrl = 'https://cloudflare.com' + 
-                            '?file=' + encodeURIComponent(absolutePdfUrl) + 
-                            '#page=' + pageNum;
+            // Dış servisleri tamamen devre dışı bırakıp doğrudan yerel PDF adresini hedefler
+            var targetUrl = 'kilavuz.pdf' + cacheBuster + '#page=' + pageNum;
             
-            // Yeni sekmeyi doğrudan hedeflenen sayfadan açar
+            // Telefonun kendi orijinal PDF okuyucusunu yeni sekmede açar
             window.open(targetUrl, '_blank');
         }
 
