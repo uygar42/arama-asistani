@@ -15,14 +15,15 @@
             overflow-x: hidden;
         }
         .header {
-            background-color: #0056b3;
+            background-color: #28a745; /* İstediğiniz açık ton yeşil */
             color: white;
             text-align: center;
             padding: 20px 15px;
             border-radius: 12px;
             margin-bottom: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
-        .header h1 { margin: 0; font-size: 18px; font-weight: bold; }
+        .header h1 { margin: 0; font-size: 18px; font-weight: bold; color: white; }
         .main-pdf-link {
             display: flex;
             align-items: center;
@@ -74,7 +75,7 @@
             padding: 0;
         }
         .search-button {
-            background-color: #0056b3;
+            background-color: #28a745; /* Buton da yeşil yapıldı */
             color: white;
             border: none;
             padding: 12px 22px;
@@ -84,6 +85,7 @@
             cursor: pointer;
             white-space: nowrap;
         }
+        .search-button:active { background-color: #218838; }
         .card {
             background: white;
             border-left: 5px solid #ffc107;
@@ -124,8 +126,8 @@
             align-items: center;
             justify-content: center;
             background-color: #f8f9fa;
-            color: #0056b3;
-            border: 1px solid #0056b3;
+            color: #28a745;
+            border: 1px solid #28a745;
             padding: 12px;
             border-radius: 6px;
             text-decoration: none;
@@ -137,18 +139,63 @@
             clear: both;
             cursor: pointer;
         }
-        .pdf-button:active { background-color: #e6f0fa; }
+        .pdf-button:active { background-color: #e2f0d9; }
+        
+        /* Geri dön butonu ve tam ekran PDF modu stili */
+        .back-bar {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #28a745;
+            padding: 12px;
+            box-sizing: border-box;
+            z-index: 9999;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        .back-btn {
+            display: block;
+            width: 100%;
+            background: white;
+            color: #28a745;
+            border: none;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            cursor: pointer;
+        }
+        .pdf-view-frame {
+            display: none;
+            position: fixed;
+            top: 65px;
+            left: 0;
+            width: 100%;
+            height: calc(100% - 65px);
+            border: none;
+            z-index: 9998;
+            background: white;
+        }
     </style>
 </head>
 <body>
+    <!-- Geri dönüş mekanizması için gizli tam ekran katmanları -->
+    <div id="backBar" class="back-bar">
+        <button class="back-btn" onclick="closePdfView()">⬅ ASİSTAN EKRANINA GERİ DÖN</button>
+    </div>
+    <iframe id="pdfViewFrame" class="pdf-view-frame"></iframe>
+
+    <div id="mainContent">
     <div class="header">
         <h1>MİREL SÜT KAZAN DAİRESİ ASİSTANI</h1>
         <p style="font-size:14px; margin: 8px 0; font-weight:bold; color:#ffc107; letter-spacing: 0.5px;">Hazırlayan: Uygar Umut Acar</p>
         <p style="margin:0; font-size:11px; opacity:0.9;">Sıfır Duruş Süresi İçin Akıllı Arıza ve Operasyon Kılavuzu</p>
     </div>
 
-    <!-- Cloudflare engelini tamamen aşan, doğrudan yerel döküman bağlantısı -->
-    <a href="kilavuz.pdf" target="_blank" class="main-pdf-link">📕 Kılavuzun Tamamını Aç (Kesintisiz Dikey Kaydırma)</a>
+    <!-- İstediğiniz gibi parantez içi silindi, doğrudan temiz döküman bağlantısı -->
+    <a href="kilavuz.pdf" target="_blank" class="main-pdf-link">📕 Kılavuzun Tamamını Aç</a>
 
     <div class="search-container">
         <div class="search-wrapper">
@@ -233,17 +280,31 @@
             </div>
         </div>
     </div>
+</div> <!-- mainContent bitişi -->
 
-    <script>
+<script>
         function openPdfSection(pageNum) {
-            // Telefonun eski kilitli önbelleğini bozmak için dinamik zaman damgası üretir
             var cacheBuster = '?v=' + new Date().getTime();
-            
-            // Dış servisleri tamamen devre dışı bırakıp doğrudan yerel PDF adresini hedefler
             var targetUrl = 'kilavuz.pdf' + cacheBuster + '#page=' + pageNum;
             
-            // Telefonun kendi orijinal PDF okuyucusunu yeni sekmede açar
-            window.open(targetUrl, '_blank');
+            // Ana arayüzü gizle, tam ekran PDF alanını ve yeşil GERİ DÖN butonunu aktifleştir
+            document.getElementById('mainContent').style.display = 'none';
+            document.getElementById('backBar').style.display = 'block';
+            
+            var frame = document.getElementById('pdfViewFrame');
+            frame.style.display = 'block';
+            frame.src = targetUrl;
+            
+            // Sayfayı en yukarı taşıyarak butonun net görünmesini sağla
+            window.scrollTo(0, 0);
+        }
+
+        function closePdfView() {
+            // Tam ekran PDF modunu kapat, ana asistan arayüzünü geri getir
+            document.getElementById('pdfViewFrame').style.display = 'none';
+            document.getElementById('pdfViewFrame').src = '';
+            document.getElementById('backBar').style.display = 'none';
+            document.getElementById('mainContent').style.display = 'block';
         }
 
         function searchEngine() {
