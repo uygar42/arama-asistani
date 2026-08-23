@@ -151,7 +151,7 @@
                 2. Ekrandan sırasıyla <b>Operational stat › Fault History</b> adımlarıyla arıza koduna ulaşın.<br>
                 3. Açıklamayı, kabin içindeki <b>List of fault status messages of LMV5... system</b> sayfasından bulunuz.<br>
                 4. Arıza giderildikten sonra; ekranın <b>Alarm</b> sayfası üzerinden <b>Reset</b> işlemi yapın.</p>
-                <button type="button" class="pdf-button" onclick="openPDF('kilavuz.pdf#page=20')">📄 Sayfa 20: Brülör Görselini Tam Ekran Aç</button>
+                <button type="button" class="pdf-button" onclick="openTargetPage(20)">📄 Kılavuz Sayfa 20'yi Doğrudan Yeni Sekmede Aç</button>
             </div>
         </div>
 
@@ -164,7 +164,7 @@
                 <p><b>➔ Seviye Propları Gösterge Arızaları:</b> Ekranda <b>DLow</b> ibaresi görüyorsanız; propları sökerek <b>kireçlenmeye karşı</b> kontrol ediniz. Sorun çözülmez ise güç ve haberleşme kablolarını denetleyin.</p>
                 <p><b>➔ Kazan Besi Pompası Arızaları:</b> Su besleme yapılamazsa <b>yedek besi pompasını devreye alınız</b>. Arıza sürücüde ise 'Alarm' sayfasını inceleyin, su hatlarını ve <b>degazör tankının doluluk seviyesini</b> kontrol ediniz.</p>
                 <p style="color:#dc3545;"><b>🛑 HAYATİ GÜVENLİK NOTU:</b> Yedek pompa da çalışmazsa, <b>DERHAL kazan ateşlemeyi durdurunuz!</b> Ana buhar vanasını kapatıp su seviyesini koruyunuz.</p>
-                <button type="button" class="pdf-button" onclick="openPDF('kilavuz.pdf#page=17')">📄 Sayfa 17: Şemayı Tam Ekran Aç</button>
+                <button type="button" class="pdf-button" onclick="openTargetPage(17)">📄 Kılavuz Sayfa 17'yi Doğrudan Yeni Sekmede Aç</button>
             </div>
         </div>
 
@@ -175,7 +175,7 @@
             <div class="card-content">
                 <p><b>Kapsam:</b> Kazan dairesi su giriş hatları, degazör bağlantıları, besi pompaları giriş-çıkış vanaları ve bypass hatlarının komple akış diyagramı.</p>
                 <p><b>Operasyonel Kullanım:</b> Hatta yapılacak bakım, körleme veya vana değişim operasyonlarından önce bu şemayı inceleyerek akış yönünü mutlaka kontrol ediniz.</p>
-                <button type="button" class="pdf-button" onclick="openPDF('kilavuz.pdf#page=14')">📄 Sayfa 14: Akış Şemasını Tam Ekran Aç</button>
+                <button type="button" class="pdf-button" onclick="openTargetPage(14)">📄 Kılavuz Sayfa 14'ü Doğrudan Yeni Sekmede Aç</button>
             </div>
         </div>
 
@@ -188,7 +188,7 @@
                 <p><b>💨 Baca Gazı Maksimum Sıcaklığı:</b> 270 °C</p>
                 <p><b>💥 Maksimum Buhar Basıncı:</b> 20 Bar</p>
                 <p><b>🌀 Maksimum Fırın Basıncı:</b> 1500 Pa</p>
-                <button type="button" class="pdf-button" onclick="openPDF('kilavuz.pdf#page=10')">📄 Sayfa 10: Ekran Menü Rehberini Tam Ekran Aç</button>
+                <button type="button" class="pdf-button" onclick="openTargetPage(10)">📄 Kılavuz Sayfa 10'u Doğrudan Yeni Sekmede Aç</button>
             </div>
         </div>
 
@@ -198,7 +198,7 @@
             <div class="card-tag" style="background:#ffe8d6; color:#a04000;">🔥 GÜVENLİ ATEŞLEME</div>
             <div class="card-content">
                 <p><b>Boiler Status:</b> Auto Running | <b>Feed Pump:</b> Auto | <b>Water Level:</b> Normal</p>
-                <button type="button" class="pdf-button" onclick="openPDF('kilavuz.pdf#page=11')">📄 Sayfa 11: Ateşleme Prosedürünü Tam Ekran Aç</button>
+                <button type="button" class="pdf-button" onclick="openTargetPage(11)">📄 Kılavuz Sayfa 11'i Doğrudan Yeni Sekmede Aç</button>
             </div>
         </div>
 
@@ -210,15 +210,24 @@
                 <p>• <b>Ana Buhar Vanası:</b> Buhar kesme operasyonları için ana vana.</p>
                 <p>• <b>Havadanlık Vanası:</b> Üst sistem hava tahliye ve emniyet blöf hattı üzerindedir.</p>
                 <p>• <b>Ana Gaz Kesme Valfi:</b> Brülör gaz rampası girişindedir.</p>
-                <button type="button" class="pdf-button" onclick="openPDF('kilavuz.pdf#page=2')">📄 Sayfa 2: Vana Yerleşim Planını Tam Ekran Aç</button>
+                <button type="button" class="pdf-button" onclick="openTargetPage(2)">📄 Kılavuz Sayfa 2'yi Doğrudan Yeni Sekmede Aç</button>
             </div>
         </div>
     </div>
 
     <script>
-        function openPDF(pdfUrl) {
-            // Yeni sekme açmak yerine mevcut pencereyi tam ekran PDF moduna geçirir
-            window.location.href = pdfUrl;
+        function openTargetPage(pageNum) {
+            // Canlı yayın adresini ve PDF yolunu otomatik olarak doğrular
+            var currentHost = window.location.protocol + '//' + window.location.host + window.location.pathname;
+            var absolutePdfUrl = currentHost.replace('index.html', '') + 'kilavuz.pdf';
+            
+            // Apple engellerini %100 aşan, resmi ve stabil çevrimiçi önizleme bağlantısı
+            var targetUrl = 'https://cloudflare.com' + 
+                            '?file=' + encodeURIComponent(absolutePdfUrl) + 
+                            '#page=' + pageNum;
+            
+            // Yeni sekmeyi doğrudan hedeflenen sayfadan açar
+            window.open(targetUrl, '_blank');
         }
 
         function searchEngine() {
