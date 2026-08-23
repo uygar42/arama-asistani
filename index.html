@@ -234,9 +234,15 @@
         </div>
     </div>
 
-    <script>
-        function togglePDF(containerId, pdfUrl) {
+           function togglePDF(containerId, pdfUrl) {
             var container = document.getElementById(containerId);
+            
+            // Canlı GitHub Pages adresinizi otomatik tespit eder
+            var currentHost = window.location.protocol + '//' + window.location.host + window.location.pathname;
+            var absolutePdfUrl = currentHost.replace('index.html', '') + pdfUrl;
+            
+            // Apple kısıtlamalarını aşan ve sekme açmadan sayfa odaklayan Google motoru linki
+            var googleViewerUrl = 'https://google.com' + encodeURIComponent(absolutePdfUrl);
             
             // Eğer pencere zaten açıksa kapat ve hafızadan temizle
             if (container.style.display === 'block') {
@@ -250,9 +256,9 @@
                     activeContainers[i].innerHTML = '';
                 }
                 
-                // Seçilen kartın altında PDF penceresini oluştur ve göster
+                // Seçilen kartın altında PDF penceresini Google motoru ile oluştur ve göster
                 container.style.display = 'block';
-                container.innerHTML = '<iframe src="' + pdfUrl + '" class="pdf-frame" allow="fullscreen"></iframe>';
+                container.innerHTML = '<iframe src="' + googleViewerUrl + '" class="pdf-frame" allow="fullscreen"></iframe>';
             }
         }
 
