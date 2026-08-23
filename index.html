@@ -21,7 +21,7 @@
         .card-tag { display: inline-block; background: #fff3cd; color: #856404; font-size: 11px; font-weight: bold; padding: 3px 8px; border-radius: 4px; margin-bottom: 12px; }
         .card-content { font-size: 14px; color: #333; line-height: 1.6; word-wrap: break-word; }
         .card-content p { margin: 0 0 12px 0; }
-        .pdf-button { display: flex; align-items: center; justify-content: center; background-color: #f8f9fa; color: #7bc07b; border: 1px solid #7bc07b; padding: 12px; border-radius: 6px; text-decoration: none; font-size: 13px; font-weight: bold; margin-top: 15px; width: 100%; box-sizing: border-box; clear: both; cursor: pointer; }
+        .pdf-button { display: flex; align-items: center; justify-content: center; background-color: #f8f9fa; color: #7bc07b; border: 1px solid #7bc07b; padding: 12px; border-radius: 6px; text-decoration: none; font-size: 13px; font-weight: bold; margin-top: 15px; width: 100%; box-sizing: border-box; clear: both; cursor: pointer; text-align: center; line-height: 1.4; }
         .pdf-button:active { background-color: #f0f7f0; }
     </style>
 </head>
@@ -46,42 +46,42 @@
 
         <div id="resultsContainer">
             <!-- KART 1 -->
-            <div class="card" style="border-left-color: #dc3545;">
+            <div class="card" style="border-left-color: #dc3545;" data-keywords="ateşleme, gaz, valf, rampa, brülör, siemens, ekran, azl, fault, reset, alarm, ariza">
                 <div class="card-title">Kazan Control Ekranı: Brülör Arızası (Burner Failure)</div>
                 <div class="card-tag" style="background:#f8d7da; color:#721c24;">KRİTİK ARIZA</div>
                 <div class="card-content">
                     <p><b>Belirti:</b> 'Burner Failure' arızası görülmesi veya ateşleme sisteminin durması.</p>
                     <p><b>Müdahale Adımları:</b><br>1. Ateşleme arızaları, panodaki <b>Siemens AZL52.00B1</b> ekranında listelenir.<br>2. Ekrandan sırasıyla <b>Operational stat › Fault History</b> adımlarıyla arıza koduna ulaşın.<br>3. Açıklamayı, kabin içindeki <b>List of fault status messages of LMV5... system</b> sayfasından bulunuz.<br>4. Arıza giderildikten sonra; ekranın <b>Alarm</b> sayfası üzerinden <b>Reset</b> işlemi yapın.</p>
-                    <button type="button" class="pdf-button" onclick="goToPdfPage(20)">📕 Sayfa 20: Brülör Kılavuz Sayfasına Git</button>
+                    <button type="button" class="pdf-button" onclick="goToPdf()">📕 Kılavuzu Aç (Arıza Tanımının Devamı İçin Sayfa 20'ye Gidiniz)</button>
                 </div>
             </div>
 
             <!-- KART 2 -->
-            <div class="card" style="border-left-color: #007bff;">
+            <div class="card" style="border-left-color: #007bff;" data-keywords="su, motor, basınç, seviye, prop, kireç, bar, pompa, transmitter, kalibrasyon, dlow, degazör">
                 <div class="card-title">3.1. Su Seviye ve Besi Pompası Arızaları</div>
                 <div class="card-tag" style="background:#cce5ff; color:#004085;">POMPA & GÖSTERGE SİSTEMLERİ</div>
                 <div class="card-content">
                     <p><b>➔ Basınç Transmitteri Kalibrasyon Arızası:</b> Su seviyesini gerçek dışı değerlerde <b>(242mm vb.)</b> görüyorsanız, kalibrasyon bozulmuştur. Kazanı soğutup analog gösterge yarıdayken kalibrasyon işlemini yapın.</p>
                     <p><b>➔ Seviye Propları Gösterge Arızaları:</b> Ekranda <b>DLow</b> ibaresi görüyorsanız; propları sökerek <b>kireçlenmeye karşı</b> kontrol ediniz. Sorun çözülmez ise güç ve haberleşme kablolarını denetleyin.</p>
                     <p><b>➔ Kazan Besi Pompası Arızaları:</b> Su besleme yapılamazsa <b>yedek besi pompasını devreye alınız</b>. Arıza sürücüde ise 'Alarm' sayfasını inceleyin, su hatlarını ve <b>degazör tankının doluluk seviyesini</b> kontrol ediniz.</p>
-                    <p style="color:#dc3545;"><b>🛑 HAYATİ GÜVEN LİK NOTU:</b> Yedek pompa da çalışmazsa, <b>DERHAL kazan ateşlemeyi durdurunuz!</b> Ana buhar vanasını kapatıp su seviyesini koruyunuz.</p>
-                    <button type="button" class="pdf-button" onclick="goToPdfPage(17)">📕 Sayfa 17: Su Seviye Şemasına Git</button>
+                    <p style="color:#dc3545;"><b>🛑 HAYATİ GÜVENLİK NOTU:</b> Yedek pompa da çalışmazsa, <b>DERHAL kazan ateşlemeyi durdurunuz!</b> Ana buhar vanasını kapatıp su seviyesini koruyunuz.</p>
+                    <button type="button" class="pdf-button" onclick="goToPdf()">📕 Kılavuzu Aç (Teknik Şemanın Devamı İçin Sayfa 17'ye Gidiniz)</button>
                 </div>
             </div>
 
             <!-- KART 3 -->
-            <div class="card" style="border-left-color: #28a745;">
+            <div class="card" style="border-left-color: #28a745;" data-keywords="su, motor, vana, şema, diyagram, hat, akış, bypass, körleme, bakım, degazör">
                 <div class="card-title">Buhar Kazanı Su Besleme Akış Şeması</div>
                 <div class="card-tag" style="background:#d4edda; color:#155724;">TEKNİK ŞEMA & DİYAGRAM</div>
                 <div class="card-content">
                     <p><b>Kapsam:</b> Kazan dairesi su giriş hatları, degazör bağlantıları, besi pompaları giriş-çıkış vanaları ve bypass hatlarının komple akış diyagramı.</p>
                     <p><b>Operasyonel Kullanım:</b> Hatta yapılacak bakım, körleme veya vana değişim operasyonlarından önce bu şemayı inceleyerek akış yönünü mutlaka kontrol ediniz.</p>
-                    <button type="button" class="pdf-button" onclick="goToPdfPage(14)">📕 Sayfa 14: Akış Şemasına Git</button>
+                    <button type="button" class="pdf-button" onclick="goToPdf()">📕 Kılavuzu Aç (Akış Şemasının Devamı İçin Sayfa 14'e Gidiniz)</button>
                 </div>
             </div>
 
             <!-- KART 4 -->
-            <div class="card" style="border-left-color: #6c757d;">
+            <div class="card" style="border-left-color: #6c757d;" data-keywords="ısı, derece, sıcaklık, baca, fırın, limit, sınır, emniyet, buhar, basınç, pa, bar, veri">
                 <div class="card-title">Kazan Control Ekranı Verileri & Kritik Sınır Değerleri</div>
                 <div class="card-tag" style="background:#e2e3e5; color:#383d41;">KONTROL PANELİ & EMNİYET LİMİTLERİ</div>
                 <div class="card-content">
@@ -89,42 +89,39 @@
                     <p><b>💨 Baca Gazı Maksimum Sıcaklığı:</b> 270 °C</p>
                     <p><b>💥 Maksimum Buhar Basıncı:</b> 20 Bar</p>
                     <p><b>🌀 Maksimum Fırın Basıncı:</b> 1500 Pa</p>
-                    <button type="button" class="pdf-button" onclick="goToPdfPage(10)">📕 Sayfa 10: Ekran Menü Rehberine Git</button>
+                    <button type="button" class="pdf-button" onclick="goToPdf()">📕 Kılavuzu Aç (Ekran Menü Rehberi İçin Sayfa 10'a Gidiniz)</button>
                 </div>
             </div>
 
             <!-- KART 5 -->
-            <div class="card" style="border-left-color: #fd7e14;">
+            <div class="card" style="border-left-color: #fd7e14;" data-keywords="ateşleme, start, çalıştırma, prosedür, normal, auto, running, güvenli, pompa">
                 <div class="card-title">Kazan Ateşleme Esnasında Kontrol Ekranı Değerleri</div>
                 <div class="card-tag" style="background:#ffe8d6; color:#a04000;">🔥 GÜVENLİ ATEŞLEME</div>
                 <div class="card-content">
                     <p><b>Boiler Status:</b> Auto Running | <b>Feed Pump:</b> Auto | <b>Water Level:</b> Normal</p>
-                    <button type="button" class="pdf-button" onclick="goToPdfPage(11)">📕 Sayfa 11: Ateşleme Prosedürüne Git</button>
+                    <button type="button" class="pdf-button" onclick="goToPdf()">📕 Kılavuzu Aç (Ateşleme Prosedürü İçin Sayfa 11'e Gidiniz)</button>
                 </div>
             </div>
 
             <!-- KART 6 -->
-            <div class="card" style="border-left-color: #17a2b8;">
+            <div class="card" style="border-left-color: #17a2b8;" data-keywords="vana, hat, plan, yerleşim, kesme, valf, buhar, havadanlık, blöf, gaz, rampa">
                 <div class="card-title">Kazan Dairesi Kritik Vanalar & Konum Rehberi</div>
                 <div class="card-tag" style="background:#d1ecf1; color:#0c5460;">⚙ VANA & HAT YÖNETİMİ</div>
                 <div class="card-content">
                     <p>• <b>Ana Buhar Vanası:</b> Buhar kesme operasyonları için ana vana.</p>
                     <p>• <b>Havadanlık Vanası:</b> Üst sistem hava tahliye ve emniyet blöf hattı üzerindedir.</p>
                     <p>• <b>Ana Gaz Kesme Valfi:</b> Brülör gaz rampası girişindedir.</p>
-                    <button type="button" class="pdf-button" onclick="goToPdfPage(2)">📕 Sayfa 2: Vana Yerleşim Planına Git</button>
+                    <button type="button" class="pdf-button" onclick="goToPdf()">📕 Kılavuzu Aç (Vana Yerleşim Planı İçin Sayfa 2'ye Gidiniz)</button>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        function goToPdfPage(pageNum) {
-            // Canlı yayın adresini ve PDF döküman yolunu otomatik algılar
+        function goToPdf() {
             var currentHost = window.location.protocol + '//' + window.location.host + window.location.pathname;
             var absolutePdfUrl = currentHost.replace('index.html', '') + 'kilavuz.pdf';
-            
-            // Tarayıcının ana PDF geçmişini bozmadan doğrudan hedef sayfaya yönlendirir
-            window.location.href = absolutePdfUrl + '#page=' + pageNum;
+            window.location.href = absolutePdfUrl;
         }
 
         function searchEngine() {
@@ -149,8 +146,12 @@
             }
 
             for (var i = 0; i < cards.length; i++) {
+                // Kartın hem içindeki normal yazıları hem de gizli akıllı anahtar kelimelerini topluyoruz
                 var cardText = cards[i].innerText.toLowerCase();
-                if (cardText.includes(input)) {
+                var keywords = cards[i].getAttribute('data-keywords') ? cards[i].getAttribute('data-keywords').toLowerCase() : '';
+                
+                // Eğer arama kelimesi metinde VEYA gizli kelime havuzunda varsa kartı göster
+                if (cardText.includes(input) || keywords.includes(input)) {
                     cards[i].style.display = "block";
                     hasResult = true;
                 } else {
