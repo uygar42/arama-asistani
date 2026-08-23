@@ -15,7 +15,7 @@
             overflow-x: hidden;
         }
         .header {
-            background-color: #7bc07b; /* Açık Pastel Yeşil */
+            background-color: #7bc07b; /* İstediğiniz Açık Pastel Yeşil */
             color: white;
             text-align: center;
             padding: 20px 15px;
@@ -28,7 +28,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: #8B4513; /* Şık Kahverengi Tonu */
+            background-color: #8B4513; /* İstediğiniz Kahverengi Buton */
             color: white;
             padding: 14px 12px;
             border-radius: 8px;
@@ -38,10 +38,6 @@
             margin-bottom: 15px;
             text-align: center;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            cursor: pointer;
-            border: none;
-            width: 100%;
-            box-sizing: border-box;
         }
         .main-pdf-link:active { background-color: #5c2e0b; }
         .search-container {
@@ -130,7 +126,7 @@
             align-items: center;
             justify-content: center;
             background-color: #f8f9fa;
-            color: #7bc07b; /* Buton yazısı da pastel yeşil */
+            color: #7bc07b;
             border: 1px solid #7bc07b;
             padding: 12px;
             border-radius: 6px;
@@ -145,61 +141,42 @@
         }
         .pdf-button:active { background-color: #f0f7f0; }
         
-        /* Akıllı Geri Dönüş Barları */
-        .back-bar {
+        /* Akıllı ve iOS Uyumlu Tam Ekran Görsel Katmanı */
+        .image-overlay {
             display: none;
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            background-color: #7bc07b; /* Pastel Yeşil Geri Dönüş Barı */
-            padding: 12px;
-            box-sizing: border-box;
-            z-index: 9999;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-        }
-        .back-btn {
-            display: block;
-            width: 100%;
-            background: white;
-            color: #7bc07b;
-            border: none;
-            padding: 12px;
-            border-radius: 6px;
-            font-size: 14px;
-            font-weight: bold;
-            text-align: center;
-            cursor: pointer;
-        }
-        .view-content-frame {
-            display: none;
-            position: fixed;
-            top: 65px;
-            left: 0;
-            width: 100%;
-            height: calc(100% - 65px);
-            border: none;
-            z-index: 9998;
-            background: white;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 10000;
             overflow: auto;
-            -webkit-overflow-scrolling: touch;
+            text-align: center;
+            cursor: pointer; /* Tıklanabilir hissi verir */
         }
-        .single-page-img {
-            display: block;
+        .overlay-img {
             max-width: 100%;
             height: auto;
-            margin: 20px auto;
-            padding: 0 10px;
+            margin-top: 40px;
+            padding: 10px;
             box-sizing: border-box;
+        }
+        .overlay-hint {
+            color: #7bc07b;
+            font-size: 13px;
+            font-weight: bold;
+            margin-top: 15px;
+            display: block;
         }
     </style>
 </head>
 <body>
-    <!-- Akıllı Geri Dönüş ve Gösterim Alanları -->
-    <div id="backBar" class="back-bar">
-        <button class="back-btn" onclick="closeView()">⬅ ASİSTAN EKRANINA GERİ DÖN</button>
+    <!-- Resme dokunulduğunda anında asistan ekranına dönecek olan gizli katman -->
+    <div id="imgOverlay" class="image-overlay" onclick="closeImageOverlay()">
+        <span class="overlay-hint">⬅ ASİSTANA DÖNMEK İÇİN RESMİN HERHANGİ BİR YERİNE DOKUNUN</span>
+        <img id="targetImg" class="overlay-img" src="" alt="Şema Görseli">
     </div>
-    <div id="viewContentFrame" class="view-content-frame"></div>
 
     <div id="mainContent">
     <div class="header">
@@ -208,8 +185,8 @@
         <p style="margin:0; font-size:11px; opacity:0.9;">Sıfır Duruş Süresi İçin Akıllı Arıza ve Operasyon Kılavuzu</p>
     </div>
 
-    <!-- İstediğiniz gibi Şık Kahverengi Buton yapıldı ve akıllı tam ekran moduna bağlandı -->
-    <button type="button" class="main-pdf-link" onclick="openFullPdf()">📕 Kılavuzun Tamamını Aç</button>
+    <!-- Yeni sekmede açılan ve iOS tarayıcısının geri butonuyla yönetilen ana kılavuz bağlantısı -->
+    <a href="kilavuz.pdf" target="_blank" class="main-pdf-link">📕 Kılavuzun Tamamını Aç</a>
 
     <div class="search-container">
         <div class="search-wrapper">
@@ -231,7 +208,7 @@
                 2. Ekrandan sırasıyla <b>Operational stat › Fault History</b> adımlarıyla arıza koduna ulaşın.<br>
                 3. Açıklamayı, kabin içindeki <b>List of fault status messages of LMV5... system</b> sayfasından bulunuz.<br>
                 4. Arıza giderildikten sonra; ekranın <b>Alarm</b> sayfası üzerinden <b>Reset</b> işlemi yapın.</p>
-                <button type="button" class="pdf-button" onclick="openSinglePageImage(20)">🖼 Sayfa 20: Brülör Görselini Net Aç</button>
+                <button type="button" class="pdf-button" onclick="viewImagePage(20)">🖼 Sayfa 20: Brülör Görselini Net Aç</button>
             </div>
         </div>
 
@@ -244,7 +221,7 @@
                 <p><b>➔ Seviye Propları Gösterge Arızaları:</b> Ekranda <b>DLow</b> ibaresi görüyorsanız; propları sökerek <b>kireçlenmeye karşı</b> kontrol ediniz. Sorun çözülmez ise güç ve haberleşme kablolarını denetleyin.</p>
                 <p><b>➔ Kazan Besi Pompası Arızaları:</b> Su besleme yapılamazsa <b>yedek besi pompasını devreye alınız</b>. Arıza sürücüde ise 'Alarm' sayfasını inceleyin, su hatlarını ve <b>degazör tankının doluluk seviyesini</b> kontrol ediniz.</p>
                 <p style="color:#dc3545;"><b>🛑 HAYATİ GÜVENLİK NOTU:</b> Yedek pompa da çalışmazsa, <b>DERHAL kazan ateşlemeyi durdurunuz!</b> Ana buhar vanasını kapatıp su seviyesini koruyunuz.</p>
-                <button type="button" class="pdf-button" onclick="openSinglePageImage(17)">🖼 Sayfa 17: Su Seviye Şemasını Net Aç</button>
+                <button type="button" class="pdf-button" onclick="viewImagePage(17)">🖼 Sayfa 17: Su Seviye Şemasını Net Aç</button>
             </div>
         </div>
 
@@ -255,7 +232,7 @@
             <div class="card-content">
                 <p><b>Kapsam:</b> Kazan dairesi su giriş hatları, degazör bağlantıları, besi pompaları giriş-çıkış vanaları ve bypass hatlarının komple akış diyagramı.</p>
                 <p><b>Operasyonel Kullanım:</b> Hatta yapılacak bakım, körleme veya vana değişim operasyonlarından önce bu şemayı inceleyerek akış yönünü mutlaka kontrol ediniz.</p>
-                <button type="button" class="pdf-button" onclick="openSinglePageImage(14)">🖼 Sayfa 14: Akış Şemasını Net Aç</button>
+                <button type="button" class="pdf-button" onclick="viewImagePage(14)">🖼 Sayfa 14: Akış Şemasını Net Aç</button>
             </div>
         </div>
 
@@ -268,7 +245,7 @@
                 <p><b>💨 Baca Gazı Maksimum Sıcaklığı:</b> 270 °C</p>
                 <p><b>💥 Maksimum Buhar Basıncı:</b> 20 Bar</p>
                 <p><b>🌀 Maksimum Fırın Basıncı:</b> 1500 Pa</p>
-                <button type="button" class="pdf-button" onclick="openSinglePageImage(10)">🖼 Sayfa 10: Ekran Menü Rehberini Net Aç</button>
+                <button type="button" class="pdf-button" onclick="viewImagePage(10)">🖼 Sayfa 10: Ekran Menü Rehberini Net Aç</button>
             </div>
         </div>
 
@@ -278,7 +255,7 @@
             <div class="card-tag" style="background:#ffe8d6; color:#a04000;">🔥 GÜVENLİ ATEŞLEME</div>
             <div class="card-content">
                 <p><b>Boiler Status:</b> Auto Running | <b>Feed Pump:</b> Auto | <b>Water Level:</b> Normal</p>
-                <button type="button" class="pdf-button" onclick="openSinglePageImage(11)">🖼 Sayfa 11: Ateşleme Prosedürünü Net Aç</button>
+                <button type="button" class="pdf-button" onclick="viewImagePage(11)">🖼 Sayfa 11: Ateşleme Prosedürünü Net Aç</button>
             </div>
         </div>
 
@@ -290,57 +267,41 @@
                 <p>• <b>Ana Buhar Vanası:</b> Buhar kesme operasyonları için ana vana.</p>
                 <p>• <b>Havadanlık Vanası:</b> Üst sistem hava tahliye ve emniyet blöf hattı üzerindedir.</p>
                 <p>• <b>Ana Gaz Kesme Valfi:</b> Brülör gaz rampası girişindedir.</p>
-                <button type="button" class="pdf-button" onclick="openSinglePageImage(2)">🖼 Sayfa 2: Vana Yerleşim Planını Net Aç</button>
+                <button type="button" class="pdf-button" onclick="viewImagePage(2)">🖼 Sayfa 2: Vana Yerleşim Planını Net Aç</button>
             </div>
         </div>
     </div>
 </div> <!-- mainContent bitişi -->
 
 <script>
-        function openFullPdf() {
-            var cacheBuster = '?v=' + new Date().getTime();
-            var targetUrl = 'kilavuz.pdf' + cacheBuster;
-            
-            // Ana ekranı gizle, üst barı ve döküman çerçevesini göster
-            document.getElementById('mainContent').style.display = 'none';
-            document.getElementById('backBar').style.display = 'block';
-            
-            var container = document.getElementById('viewContentFrame');
-            container.style.display = 'block';
-            // Tüm kılavuz için iframe yapısı kullanılır
-            container.innerHTML = '<iframe src="' + targetUrl + '" style="width:100%; height:100%; border:none;"></iframe>';
-            
-            window.scrollTo(0, 0);
-        }
-
-        function openSinglePageImage(pageNum) {
-            // Canlı yayın adresini doğrular ve PDF yolunu bulur
+        function viewImagePage(pageNum) {
+            // Canlı yayın adresini doğrular ve dosya yolunu hazırlar
             var currentHost = window.location.protocol + '//' + window.location.host + window.location.pathname;
             var absolutePdfUrl = currentHost.replace('index.html', '') + 'kilavuz.pdf';
             var cacheBuster = '?v=' + new Date().getTime();
             
-            // Apple engellerini ve Cloudflare hatalarını %100 aşan bağımsız görsel oluşturucu bağlantı yapısı
+            // Cloudflare hatalarını %100 aşan, resmi ve stabil çevrimiçi görsel önizleme bağlantısı
             var targetImageUrl = 'https://cloudflare.com' + 
                                  '?file=' + encodeURIComponent(absolutePdfUrl + cacheBuster) + 
                                  '#page=' + pageNum;
             
-            // Ana ekranı gizle, üst geri dönüş barını aktifleştir
+            // Ana ekranı gizle, tam ekran görsel önizleme katmanını aktifleştir
             document.getElementById('mainContent').style.display = 'none';
-            document.getElementById('backBar').style.display = 'block';
             
-            var container = document.getElementById('viewContentFrame');
-            container.style.display = 'block';
-            // Sadece tek bir sayfanın pürüzsüz akması için güvenli nesne çerçevesi halinde ekrana basılır
-            container.innerHTML = '<iframe src="' + targetImageUrl + '" style="width:100%; height:100%; border:none;"></iframe>';
+            var overlay = document.getElementById('imgOverlay');
+            var img = document.getElementById('targetImg');
             
+            overlay.style.display = 'block';
+            img.src = targetImageUrl;
+            
+            // Sayfayı en yukarı taşıyarak personelin görseli net görmesini sağla
             window.scrollTo(0, 0);
         }
 
-        function closeView() {
-            // Gösterim katmanlarını kapatıp temizler ve ana asistan arayüzünü geri getirir
-            document.getElementById('viewContentFrame').style.display = 'none';
-            document.getElementById('viewContentFrame').innerHTML = '';
-            document.getElementById('backBar').style.style.display = 'none';
+        function closeImageOverlay() {
+            // Görsel katmanını kapat, temizle ve ana asistan arayüzünü anında geri getir
+            document.getElementById('imgOverlay').style.display = 'none';
+            document.getElementById('targetImg').src = '';
             document.getElementById('mainContent').style.display = 'block';
         }
 
